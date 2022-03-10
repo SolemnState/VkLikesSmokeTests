@@ -63,7 +63,7 @@ public class IsLikedTest extends BaseAutotest {
         try {
             vk.likes().isLiked(actor, type, itemId).ownerId(ownerId).execute();
             fail();
-        } catch (ApiPrivateProfileException | ApiLikesReactionCanNotBeAppliedException exception) {
+        } catch (ApiPrivateProfileException exception) {
             LOG.info("Получено исключение {}", exception.toString());
             Assert.assertEquals(exception.getCode(), error.getCode(), "Код ошибки не совпадает с ожидаемым");
             Assert.assertEquals(exception.getDescription(), error.getDescription(), "Описание ошибки не совпадает с ожидаемым");

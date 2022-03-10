@@ -3,6 +3,7 @@ package com.vk.likes.smoke_tests.likes.getList;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ApiLikesReactionCanNotBeAppliedException;
 import com.vk.api.sdk.exceptions.ApiPrivateProfileException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.likes.Type;
@@ -72,7 +73,7 @@ public class GetListTest extends BaseAutotest {
         try {
             vk.likes().getList(actor, type).ownerId(ownerId).itemId(itemId).execute();
             fail();
-        } catch (ApiPrivateProfileException exception) {
+        } catch (ApiLikesReactionCanNotBeAppliedException exception) {
             LOG.info("Получено исключение {}", exception.toString());
             Assert.assertEquals(exception.getCode(), error.getCode(), "Код ошибки не совпадает с ожидаемым");
             Assert.assertEquals(exception.getDescription(), error.getDescription(), "Описание ошибки не совпадает с ожидаемым");
